@@ -13,8 +13,6 @@ login() {
 }
 
 deploy() {
-    echo "antes"
-    printenv
     docker run \
         -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
         -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
@@ -31,7 +29,6 @@ deploy() {
         -e TIER="${TIER}" \
         -e CLUSTER_REGION="${CLUSTER_REGION}" \
         ${AWS_ACCOUNT_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/iac-aws-eks-fargate:1.0.3-deploy
-        echo "depois"
 }
 
 AWS_ACCOUNT_REGISTRY=$(aws sts get-caller-identity --output text |awk '{print $1}')

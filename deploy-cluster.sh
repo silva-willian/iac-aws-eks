@@ -137,6 +137,8 @@ validate_network() {
   fi
 }
 
+printenv
+
 validate_envs
     check_sucessful
 
