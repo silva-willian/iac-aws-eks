@@ -28,7 +28,7 @@ deploy() {
         -e ROLE="${ROLE}" \
         -e TIER="${TIER}" \
         -e CLUSTER_REGION="${CLUSTER_REGION}" \
-        ${AWS_ACCOUNT_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/iac-aws-eks-fargate:1.0.3-destroy
+        ${AWS_ACCOUNT_REGISTRY}.dkr.ecr.${AWS_REGION}.amazonaws.com/iac-aws-eks-fargate:1.0.13-destroy
 
 }
 

@@ -14,6 +14,7 @@ get_vpc() {
 
     VPC_ID=$(
                 aws ec2 describe-vpcs \
+                    --region ${CLUSTER_REGION} \
                     --filters Name=tag:product,Values=network \
                         Name=tag:environment/${ENV},Values=1 \
                         Name=tag:environmentVersion/${ENV_VERSION},Values=1 \
@@ -27,6 +28,7 @@ get_private_subnets() {
 
     PRIVATE_SUBNETS=$(
                         aws ec2 describe-subnets \
+                            --region ${CLUSTER_REGION} \
                             --filters Name=tag:product,Values=network \
                                 Name=tag:environment/${ENV},Values=1 \
                                 Name=tag:environmentVersion/${ENV_VERSION},Values=1 \
@@ -44,6 +46,7 @@ get_public_subnets() {
 
     PUBLIC_SUBNETS=$(
                         aws ec2 describe-subnets \
+                            --region ${CLUSTER_REGION} \
                             --filters Name=tag:product,Values=network \
                                 Name=tag:environment/${ENV},Values=1 \
                                 Name=tag:environmentVersion/${ENV_VERSION},Values=1 \
@@ -60,6 +63,7 @@ get_public_subnets() {
 create_tag_vpc() {
 
     aws ec2 create-tags \
+        --region ${CLUSTER_REGION} \
         --resources ${VPC_ID} \
         --tags Key=kubernetes.io/cluster/${CLUSTER_NAME},Value=shared
         check_sucessful
@@ -70,11 +74,13 @@ create_tag_private_subnet() {
     for SUBNET_ID in $(echo $PRIVATE_SUBNETS | tr "," "\n")
     do
         aws ec2 create-tags \
+            --region ${CLUSTER_REGION} \
             --resources ${SUBNET_ID} \
             --tags Key=kubernetes.io/cluster/${CLUSTER_NAME},Value=shared
             check_sucessful
 
         aws ec2 create-tags \
+            --region ${CLUSTER_REGION} \
             --resources ${SUBNET_ID} \
             --tags Key=kubernetes.io/role/internal-elb,Value=1
             check_sucessful
@@ -87,11 +93,13 @@ create_tag_public_subnet() {
     for SUBNET_ID in $(echo $PUBLIC_SUBNETS | tr "," "\n")
     do
         aws ec2 create-tags \
+            --region ${CLUSTER_REGION} \
             --resources ${SUBNET_ID} \
             --tags Key=kubernetes.io/cluster/${CLUSTER_NAME},Value=shared
             check_sucessful
 
         aws ec2 create-tags \
+            --region ${CLUSTER_REGION} \
             --resources ${SUBNET_ID} \
             --tags Key=kubernetes.io/role/elb,Value=1
             check_sucessful
@@ -136,8 +144,6 @@ validate_network() {
     exit 1
   fi
 }
-
-printenv
 
 validate_envs
     check_sucessful
