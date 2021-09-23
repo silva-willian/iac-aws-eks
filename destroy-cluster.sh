@@ -24,11 +24,6 @@ validate_envs() {
   fi
 }
 
-NAME="k8s-rocketseat"
-ENV="dev"
-ENV_VERSION="v1"
-CLUSTER_REGION="us-east-1"
-
 validate_envs
   check_sucessful
 

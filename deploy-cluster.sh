@@ -108,14 +108,14 @@ deploy_cluster() {
         --write-kubeconfig \
         --tags environment=${ENV} \
         --tags environmentVersion=${ENV_VERSION} \
-        --tags productName="containers" \
-        --tags projectName="k8s" \
-        --tags owner="rocketseat" \
-        --tags createdBy="devops-tools" \
+        --tags productName="${PRODUCT_NAME}" \
+        --tags projectName="${PROJECT_NAME}" \
+        --tags owner="${OWNER}" \
+        --tags createdBy="${CREATED_BY}" \
         --tags vendor="aws" \
         --tags region=${CLUSTER_REGION} \
-        --tags role="cluster" \
-        --tags tier="gold" \
+        --tags role="${ROLE}" \
+        --tags tier="${TIER}" \
         --fargate
 }
 
@@ -136,12 +136,6 @@ validate_network() {
     exit 1
   fi
 }
-
-NAME="k8s-rocketseat"
-ENV="dev"
-ENV_VERSION="v1"
-CLUSTER_REGION="us-east-1"
-FARGATE_VERSION="1.21"
 
 validate_envs
     check_sucessful
