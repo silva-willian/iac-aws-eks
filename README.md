@@ -7,6 +7,10 @@ Instale os seguintes itens em sua maquina:
 2.  Instalar o eksctl
 3.	Instalar o Docker
 
+# Policy
+
+No arquivo policy.json temos a policy com as permissões necessárias para criação do cluster
+
 # Criando o cluster
 1. Abra o prompt de comando
 2. Acesse a pasta raiz do projeto
