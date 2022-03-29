@@ -1,0 +1,11 @@
+image: chatwork/eksctl
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  environment: dev
+  script:
+    - aws --version
+    - eksctl version
